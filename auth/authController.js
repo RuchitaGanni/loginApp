@@ -19,12 +19,13 @@ router.get('/users', (req, res) => {
 
 //register users
 router.post('/register', (req, res) => {
+    // console.log(req.body,'--------------', req.body.username)
     // encrypt password
     var hashpassword = bcrypt.hashSync(req.body.password, 8);
     var email = req.body.email
     User.find({ email: email }, (err, data) => {
         if (data.length > 0) {
-            console.log(data)
+            // console.log(data)
             res.status(500).send({ auth: false, token: 'Email Already Token' })
         } else {
             User.create({
